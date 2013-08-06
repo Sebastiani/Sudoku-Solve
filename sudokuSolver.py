@@ -12,9 +12,9 @@ class Sudoku:
             else:
         
                 for k in range(80):
-					'''
-					This gets the indexes of all squares in the row and column where the current square is located 
-					'''
+				'''
+				This gets the indexes of all squares in the row and column where the current square is located 
+				'''
                     if (k/9 == j/9) or (k%9 == j%9) or (k/27 == j/27) and ((k%9)/3 == (j%9)/3): 
                         temp = self.puzzle[k]    
                     else:
