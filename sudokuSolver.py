@@ -1,39 +1,39 @@
-'''
-Created on Aug 5, 2013
 
-@author: Prometheus
-'''
 class Sudoku:
     
     def __init__(self,puzzle):
-        self.puzzle = list(puzzle)
+        self.puzzle = list(puzzle)  
     
-    def solve(self):
+    def solve(self):    
         h = {}
         for j in range(81):
-            if self.puzzle[j] != '0':
+            if self.puzzle[j] != '0':           #If the square already has a value, skip it
                 continue
             else:
         
                 for k in range(80):
-                    if (k/9 == j/9) or (k%9 == j%9) or (k/27 == j/27) and ((k%9)/3 == (j%9)/3):
+					'''
+					This gets the indexes of all squares in the row and column where the current square is located 
+					'''
+                    if (k/9 == j/9) or (k%9 == j%9) or (k/27 == j/27) and ((k%9)/3 == (j%9)/3): 
                         temp = self.puzzle[k]    
                     else:
-                        temp =0
-
-                    h[temp] = 1
+                        temp =0   
+                    h[temp] = 1    #'temp' is the value inside the k-th square, and shall be stored as a hash key
             for i in range(1,10):
-                if str(i) in h:
+                if str(i) in h:    #eliminates values that are already used in the reference row and column
                     continue
                 else:
                     self.puzzle[j] = str(i)
-                    self.solve()
-            self.puzzle[j] = '0'
+                    self.solve()  #Recursive function call
+            self.puzzle[j] = '0'  #If it happens that no value from (1-9) could be found for the current square, assign it zero and start again(backtrack)
             return self.puzzle[j]
             
 
         print "\n\nThe solution to the problem is:\n"
-
+		'''
+		This is the 81x81 square generator
+		'''
         print "+" + "-"*29 + "+"
 
         for x in range(1,82):
